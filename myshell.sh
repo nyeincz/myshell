@@ -22,6 +22,7 @@
 	       -mysql 
                -firewall
 	       -apache
+	       -webmin
                -update ( to update the system)
                -exit " 
 	while true
@@ -80,6 +81,11 @@
 				systemctl start httpd
 				systemctl enable httpd
 				echo " You have done Apache Installation. "
+			;;
+			webmin)
+				wget http://prdownloads.sourceforge.net/webadmin/webmin-1.750-1.noarch.rpm
+				rpm -ivh webmin-1.750-1.noarch.rpm
+				firewalld-cmd --zone=public --add-port=10000/tcp --permanent
 			;;
 			update)
 				if [ $(cat /etc/redhat-release) $(uname -p) = root ]
